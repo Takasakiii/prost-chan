@@ -1,7 +1,9 @@
 const Command = require("../../Structures/Command")
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js")
 const Danbooru = require("danbooru")
-const { getImage } = require('random-reddit')
+const { getImage } = require("random-reddit")
+const client = require("nekos.life")
+const neko = new client()
 
 module.exports = class Top10Command extends Command {
     constructor(...args) {
@@ -26,6 +28,7 @@ module.exports = class Top10Command extends Command {
             }
     
             let embedsArray = []
+
             let i = 0
             for (const a of images) {
                 i++
@@ -35,6 +38,27 @@ module.exports = class Top10Command extends Command {
             return interaction.editReply({
                 content: "Aqui está suas 10 imagens <:Smirkie:939589129929367572>",
                 embeds: embedsArray
+            })
+
+        } else if(interaction.options.getString("options") == "nekos") {
+
+            let images = []
+            let embedsArray = []
+
+            await interaction.followUp("<a:loading:885888459749855282> | Buscando imagens...")
+            for (let i = 0; i < 10; i++) {
+               images.push(await neko.nsfw.nekoGif(), await neko.nsfw.neko())
+            }
+
+            let i = 0
+            for (const a of images) {
+                i++
+                embedsArray.push(new MessageEmbed().setTitle(`Imagem ${i}`).setImage(a.url).setColor("RANDOM"))
+            }
+
+            return interaction.editReply({
+                content: "Aqui está suas 10 imagens <:Smirkie:939589129929367572>",
+                embeds: embedsArray.slice(10)
             })
 
         } else {
