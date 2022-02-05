@@ -58,7 +58,7 @@ module.exports = class Top10Command extends Command {
 
             return interaction.editReply({
                 content: "Aqui está suas 10 imagens <:Smirkie:939589129929367572>",
-                embeds: embedsArray.slice(10)
+                embeds: embedsArray.slice(0, 10)
             })
 
         } else {
