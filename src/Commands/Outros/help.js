@@ -15,6 +15,23 @@ module.exports = class HelpCommand extends Command {
 
         const embed = new MessageEmbed()
 
+        if (Math.round(Math.random() * 100) == 69) {
+
+            embed.setAuthor({
+                iconURL: interaction.member.displayAvatarURL({ size: 4096, dynamic: true }),
+                name: interaction.user.tag
+            })
+    
+            embed.setFooter({
+                iconURL: this.client.user.displayAvatarURL({ size: 4096 }),
+                text: `${this.client.user.username} Todos os direitos reservados`
+            })
+
+            embed.setDescription("Quer ajuda? Procure um psicologo sou uma bot de putaria não psicologa")
+            embed.setImage("https://media.discordapp.net/attachments/739693748744618007/753665166033551390/image0.gif")
+            return interaction.followUp({ embeds: [embed ]})
+        }
+
         embed.setAuthor({
             iconURL: interaction.member.displayAvatarURL({ size: 4096, dynamic: true }),
             name: interaction.user.tag
