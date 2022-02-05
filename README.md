@@ -1,0 +1,1 @@
+# Bot de putaria no discord fodase
