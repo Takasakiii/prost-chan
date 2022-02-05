@@ -32,7 +32,8 @@ module.exports = class ProstChanClient extends Client {
 		this.utils = new Util(this)
 
 		this.settings = {
-			color: "ab55ed"
+			color: "ab55ed",
+            prefix: options.prefix
 		}
 
 		this.owners = options.owners
