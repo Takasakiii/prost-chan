@@ -19,6 +19,8 @@ module.exports = class Top10Command extends Command {
         if (interaction.options.getString("options") == "ecchi") {
 
             let images = []
+
+            await interaction.followUp("<a:loading:885888459749855282> | Buscando imagens...")
             for (let i = 0; i < 10; i++) {
                images.push(await getImage("ecchi"))
             }
@@ -27,10 +29,10 @@ module.exports = class Top10Command extends Command {
             let i = 0
             for (const a of images) {
                 i++
-                embedsArray.push(new MessageEmbed().setTitle(`Imagem ${i}`).setImage(a))
+                embedsArray.push(new MessageEmbed().setTitle(`Imagem ${i}`).setImage(a).setColor("RANDOM"))
             }
     
-            return interaction.followUp({
+            return interaction.editReply({
                 content: "Aqui está suas 10 imagens <:Smirkie:939589129929367572>",
                 embeds: embedsArray
             })
@@ -49,7 +51,7 @@ module.exports = class Top10Command extends Command {
             let i = 0
             for (const a of posts) {
                 i++
-                embedsArray.push(new MessageEmbed().setTitle(`Imagem ${i}`).setImage(a.file_url))
+                embedsArray.push(new MessageEmbed().setTitle(`Imagem ${i}`).setImage(a.file_url).setColor("RANDOM"))
             }
     
             interaction.followUp({
