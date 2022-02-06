@@ -101,7 +101,7 @@ export default class Util {
     }).then(async (commands) => {
       for (const commandFile of commands) {
         const { name } = parse(commandFile);
-        const rawFile = await import(commandFile);
+        const rawFile = await import(`file://${commandFile}`);
         const File = rawFile.default;
         if (!this.isClass(File))
           throw new TypeError(`Command ${name} doesn"t export a class.`);
@@ -124,7 +124,7 @@ export default class Util {
       for (const eventFile of events) {
         console.log(eventFile);
         const { name } = parse(eventFile);
-        const rawFile = await import(eventFile);
+        const rawFile = await import(`file://${eventFile}`);
         const File = rawFile.default;
         if (!this.isClass(File))
           throw new TypeError(`Event ${name} doesn"t export a class!`);
