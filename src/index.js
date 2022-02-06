@@ -1,8 +1,8 @@
 import Spinnies from "spinnies"
-global.spinnies = new Spinnies()
-
 import config from "./System/Config.js"
 import ProstChanClient from "./Structures/ProstChanClient.js"
+
+global.spinnies = new Spinnies()
 
 const client = new ProstChanClient(config)
 

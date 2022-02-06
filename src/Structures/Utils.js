@@ -1,11 +1,11 @@
 import { dirname, join, parse, sep } from "path"
 import { promisify } from "util"
 import pkg from "glob"
-const glob = promisify(pkg)
 import Command from "./Command.js"
 import Event from "./Event.js"
 import { createRequire } from "module"
 
+const glob = promisify(pkg)
 
 export default class Util {
 
