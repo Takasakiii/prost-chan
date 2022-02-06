@@ -3,7 +3,6 @@ import { promisify } from "util"
 import pkg from "glob"
 import Command from "./Command.js"
 import Event from "./Event.js"
-import { createRequire } from "module"
 
 const glob = promisify(pkg)
 
@@ -84,16 +83,15 @@ export default class Util {
 
 	async loadCommands() {
 
-		console.log(this.directory)
 		spinnies.add("loadCommands", {
 			text: "[UTILS] - Carregando comandos..."
 		})
 
+		console.log(await glob(`${this.directory}/src/Commands/**/*.js`))
 		return glob(`${this.directory}/src/Commands/**/*.js`).then(async (commands) => {
 			for (const commandFile of commands) {
 				const { name } = parse(commandFile)
 				const File = await import(commandFile)
-				console.log(File)
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn"t export a class.`)
 				const command = new File(this.client, name.toLowerCase())
 				if (!(command instanceof Command)) throw new TypeError(`Comamnd ${name} doesnt belong in Commands.`)
@@ -108,10 +106,12 @@ export default class Util {
 			text: "[UTILS] - Carregando eventos..."
 		})
 
+		console.log(await glob(`${this.directory}/src/Events/**/*.js`))
 		return glob(`${this.directory}/src/Events/**/*.js`).then(async (events) => {
 			for (const eventFile of events) {
+				console.log(eventFile)
 				const { name } = parse(eventFile)
-				const File = await import(eventFile).default
+				const File = await import(eventFile)
 				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn"t export a class!`)
 				const event = new File(this.client, name)
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn"t belong in Events`)
