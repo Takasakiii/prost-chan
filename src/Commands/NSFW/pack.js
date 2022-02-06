@@ -5,7 +5,7 @@ import { getImage } from "random-reddit"
 import client from "nekos.life"
 const neko = new client()
 
-export default class Top10Command extends Command {
+export default class PackCommand extends Command {
     constructor(...args) {
         super(...args, {
             name: "top10",
