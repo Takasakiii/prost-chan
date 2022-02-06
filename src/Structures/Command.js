@@ -1,6 +1,6 @@
-const { Permissions } = require("discord.js");
+import { Permissions } from "discord.js"
 
-module.exports = class Command {
+export default class Command {
 
 	constructor(client, name, options = {}) {
 		this.client = client

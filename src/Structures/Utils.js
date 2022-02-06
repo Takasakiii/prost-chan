@@ -1,10 +1,12 @@
-const path = require("path")
-const { promisify } = require("util")
-const glob = promisify(require("glob"))
-const Command = require("./Command")
-const Event = require("./Event")
+import { dirname, join, parse, sep } from "path"
+import { promisify } from "util"
+import pkg from "glob"
+const glob = promisify(pkg)
+import Command from "./Command.js"
+import Event from "./Event.js"
 
-module.exports = class Util {
+
+export default class Util {
 
 	constructor(client) {
 		this.client = client
@@ -17,7 +19,7 @@ module.exports = class Util {
 	}
 
 	get directory() {
-		return `${path.dirname(require.main.filename)}${path.sep}`
+		return `${join(dirname("..\"..\"index.js"))}${sep}`
 	}
 
 	trimArray(arr, maxLen = 10) {
@@ -81,15 +83,15 @@ module.exports = class Util {
 
 	async loadCommands() {
 
+		console.log(this.directory)
 		spinnies.add("loadCommands", {
 			text: "[UTILS] - Carregando comandos..."
 		})
 
-		return glob(`${this.directory}/src/commands/**/*.js`).then(commands => {
+		return glob(`${this.directory}/src/Commands/**/*.js`).then(async (commands) => {
 			for (const commandFile of commands) {
-				delete require.cache[commandFile]
-				const { name } = path.parse(commandFile)
-				const File = require(commandFile)
+				const { name } = parse(commandFile)
+				
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn"t export a class.`)
 				const command = new File(this.client, name.toLowerCase())
 				if (!(command instanceof Command)) throw new TypeError(`Comamnd ${name} doesnt belong in Commands.`)
@@ -104,11 +106,9 @@ module.exports = class Util {
 			text: "[UTILS] - Carregando eventos..."
 		})
 
-		return glob(`${this.directory}/src/events/**/*.js`).then(events => {
+		return glob(`${this.directory}/src/Events/**/*.js`).then(async (events) => {
 			for (const eventFile of events) {
-				delete require.cache[eventFile]
-				const { name } = path.parse(eventFile)
-				const File = require(eventFile)
+				const { name } = parse(eventFile)
 				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn"t export a class!`)
 				const event = new File(this.client, name)
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn"t belong in Events`)

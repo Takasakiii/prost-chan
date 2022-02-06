@@ -1,7 +1,7 @@
-const Command = require("../../Structures/Command")
-const { MessageEmbed } = require("discord.js")
+import Command from "../../Structures/Command.js"
+import { MessageEmbed } from "discord.js"
 
-module.exports = class HelpCommand extends Command {
+export default class HelpCommand extends Command {
     constructor(...args) {
         super(...args, {
             name: "help",

@@ -1,4 +1,4 @@
-module.exports = class Event {
+export default class Event {
 
 	constructor(client, name, options = {}) {
 		this.name = options.name || name

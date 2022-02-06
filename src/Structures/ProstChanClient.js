@@ -1,7 +1,7 @@
-const { Client, Options, Collection, Permissions } = require("discord.js")
-const Util = require("./Utils")
+import { Client, Options, Collection, Permissions } from "discord.js"
+import Util from "./Utils.js"
 
-module.exports = class ProstChanClient extends Client {
+export default class ProstChanClient extends Client {
     constructor(options = {}) {
         super({
             intents: 5633,
@@ -55,17 +55,19 @@ module.exports = class ProstChanClient extends Client {
 
 
 	async start(token = this.token) {
-		this.utils.loadCommands().catch(() => {
+		this.utils.loadCommands().catch((e) => {
+            console.log(e)
             spinnies.fail("loadCommands", {
                 text: "[UTILS] - Falha ao carregar comandos"
             })
         })
         
-		this.utils.loadEvents().catch(() => {
-            spinnies.fail("loadEvents", {
-                text: "[UTILS] - Falha ao carregar eventos"
-            })
-        })
+		//this.utils.loadEvents().catch((e) => {
+            //console.log(e)
+            //spinnies.fail("loadEvents", {
+               // text: "[UTILS] - Falha ao carregar eventos"
+            //})
+        //})
 
 		super.login(token).catch(() => {
             spinnies.fail("starter", {

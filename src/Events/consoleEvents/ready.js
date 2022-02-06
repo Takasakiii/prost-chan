@@ -1,6 +1,6 @@
-const Event = require("../../Structures/Event")
+import Event from "../../Structures/Event.js"
 
-module.exports = class ReadyEvent extends Event {
+export default class ReadyEvent extends Event {
 
     run () {
 

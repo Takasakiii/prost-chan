@@ -1,17 +1,17 @@
-const Command = require("../../Structures/Command")
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js")
-const Danbooru = require("danbooru")
-const { getImage } = require("random-reddit")
-const client = require("nekos.life")
+import Command from "../../Structures/Command.js"
+import { MessageEmbed, MessageActionRow, MessageButton } from "discord.js"
+import Danbooru from "danbooru"
+import { getImage } from "random-reddit"
+import client from "nekos.life"
 const neko = new client()
 
-module.exports = class Top10Command extends Command {
+export default class Top10Command extends Command {
     constructor(...args) {
         super(...args, {
             name: "top10",
             category: "NSFW",
             description: "Mostra imanges NSFW/SFW de sua escolha",
-            usage: "top10 | cosplay | nekos ( SFW | NSFW ) | bikini ( SFW | NSFW ) | pussy_juice | yaoi | ecchi | anal",
+            usage: "cosplay | nekos ( SFW | NSFW ) | bikini ( SFW | NSFW ) | pussy_juice | yaoi | ecchi | anal",
             ownerOnly: false
         })
     }

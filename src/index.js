@@ -1,8 +1,8 @@
-const Spinnies = require("spinnies")
+import Spinnies from "spinnies"
 global.spinnies = new Spinnies()
 
-const config = require("./src/System/Config")
-const ProstChanClient = require("./src/Structures/ProstChanClient")
+import config from "./System/Config.js"
+import ProstChanClient from "./Structures/ProstChanClient.js"
 
 const client = new ProstChanClient(config)
 

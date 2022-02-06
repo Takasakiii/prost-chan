@@ -1,6 +1,6 @@
-const Event = require("../../Structures/Event")
+import Event from "../../Structures/Event.js"
 
-module.exports = class InteractionEvent extends Event {
+export default class InteractionEvent extends Event {
 
     async run(interaction) {
 
